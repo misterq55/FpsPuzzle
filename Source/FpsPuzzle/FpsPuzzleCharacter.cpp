@@ -11,22 +11,26 @@ AFpsPuzzleCharacter::AFpsPuzzleCharacter()
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
-	bUseControllerRotationPitch = true;
+	// bUseControllerRotationPitch = true;
 
 	Camera = CreateDefaultSubobject<UCameraComponent>(TEXT("CAMERA"));
-	Camera->SetRelativeLocation(FVector(0, 0, 50));
 	Camera->SetupAttachment(RootComponent);
+	Camera->SetRelativeLocation(FVector(-34.56f, 1.75f, 74.f));
+	Camera->bUsePawnControlRotation = true;
+	
 
-	ArmMesh = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("ARM_MESH"));
-	ArmMesh->SetRelativeLocation(FVector(30, 0, 30));
-	ArmMesh->SetRelativeRotation(FRotator(0, -90, 0));
-	ArmMesh->SetupAttachment(RootComponent);
+	CharMesh = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("CHAR_MESH"));
+	CharMesh->SetRelativeLocation(FVector(-5.5f, -4.4f, -165.7f));
+	CharMesh->SetRelativeRotation(FRotator(0, -90.f, 0));
+	CharMesh->SetupAttachment(Camera);
 
-	static ConstructorHelpers::FObjectFinder<USkeletalMesh> SK_ARM(TEXT("SkeletalMesh'/Game/first-person-arms/source/fpsarms.fpsarms'"));
+	// static ConstructorHelpers::FObjectFinder<USkeletalMesh> SK_ARM(TEXT("SkeletalMesh'/Game/first-person-arms/source/fpsarms.fpsarms'"));
+	// SkeletalMesh'/Game/InfinityBladeWarriors/Character/CompleteCharacters/SK_CharM_Cardboard.SK_CharM_Cardboard'
+	static ConstructorHelpers::FObjectFinder<USkeletalMesh> SK_CHAR(TEXT("SkeletalMesh'/Game/InfinityBladeWarriors/Character/CompleteCharacters/SK_CharM_Cardboard.SK_CharM_Cardboard'"));
 
-	if (SK_ARM.Succeeded())
+	if (SK_CHAR.Succeeded())
 	{
-		ArmMesh->SetSkeletalMesh(SK_ARM.Object);
+		CharMesh->SetSkeletalMesh(SK_CHAR.Object);
 	}
 }
 

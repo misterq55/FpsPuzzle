@@ -38,7 +38,7 @@ private:
 
 private:
 	UPROPERTY(VisibleAnywhere, Category = Mesh)
-	USkeletalMeshComponent* ArmMesh;
+	USkeletalMeshComponent* CharMesh;
 
 	UPROPERTY(VisibleAnywhere, Category = Camera)
 	UCameraComponent* Camera;
