@@ -8,6 +8,7 @@
 
 class USkeletalMeshComponent;
 class UCameraComponent;
+class AWeaponActor;
 
 UCLASS()
 class FPSPUZZLE_API AFpsPuzzleCharacter : public ACharacter
@@ -36,9 +37,19 @@ private:
 	void Turn(float NewAxisValue);
 	void LookUp(float NewAxisValue);
 
+public:
+	void SetWeapon(AWeaponActor* InWeaponActor);
+	void Attack();
+
+private:
+	void Shot();
+
+private:
+	AWeaponActor* WeaponActor;
+
 private:
 	UPROPERTY(VisibleAnywhere, Category = Mesh)
-	USkeletalMeshComponent* CharMesh;
+	USkeletalMeshComponent* WeaponMesh;
 
 	UPROPERTY(VisibleAnywhere, Category = Camera)
 	UCameraComponent* Camera;
