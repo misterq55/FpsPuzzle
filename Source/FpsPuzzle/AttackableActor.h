@@ -6,6 +6,8 @@
 #include "GameFramework/Actor.h"
 #include "AttackableActor.generated.h"
 
+class UInversionComponent;
+
 UCLASS()
 class FPSPUZZLE_API AAttackableActor : public AActor
 {
@@ -24,5 +26,9 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 protected:
+	UPROPERTY(VisibleAnywhere, Category = Mesh)
 	UMeshComponent* Mesh;
+
+	UPROPERTY(VisibleAnywhere, Category = Inversion)
+	UInversionComponent* InversionComponent;
 };
