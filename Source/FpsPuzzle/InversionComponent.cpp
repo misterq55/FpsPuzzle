@@ -2,6 +2,7 @@
 
 
 #include "InversionComponent.h"
+#include "AttackableActor.h"
 
 // Sets default values for this component's properties
 UInversionComponent::UInversionComponent()
@@ -21,6 +22,7 @@ void UInversionComponent::BeginPlay()
 
 	// ...
 	
+	PrevTrans = FTransform();
 }
 
 
@@ -30,5 +32,52 @@ void UInversionComponent::TickComponent(float DeltaTime, ELevelTick TickType, FA
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
 	// ...
+
+	AAttackableActor* Owner = Cast<AAttackableActor>(GetOwner());
+
+	if (Owner)
+	{
+		
+		if (Owner->GetIsInversed())
+		{
+			FTransform CurrentTrans;
+			CurrentTrans = Owner->GetTransform();
+
+			if (CurrentTrans.Equals(PrevTrans))
+			{
+				Owner->GetMesh()->SetSimulatePhysics(false);
+				Owner->SetIsInversed(false);
+
+				PrevTrans = CurrentTrans;
+
+				return;
+			}
+
+			TransRecord.Add(CurrentTrans);
+			PrevTrans = CurrentTrans;
+		}
+		else
+		{
+			Owner->GetMesh()->SetSimulatePhysics(true);
+
+			if (TransRecord.Num())
+			{
+				FTransform Lerped;
+
+				FTransform Trans = TransRecord.Pop();
+				
+				Lerped.SetLocation(FMath::Lerp(PrevTrans.GetLocation(), Trans.GetLocation(), 0.5));
+				Lerped.SetRotation(FMath::Lerp(PrevTrans.GetRotation(), Trans.GetRotation(), 0.5));
+
+				Owner->SetActorTransform(Lerped);
+
+				PrevTrans = Trans;
+
+				/*FTransform Trans = TransRecord.Pop();
+
+				Owner->SetActorTransform(Trans);*/
+			}
+		}
+	}
 }
 

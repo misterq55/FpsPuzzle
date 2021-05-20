@@ -21,6 +21,23 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
+public:
+	void SetIsHit(bool InIsHit) { IsHit = InIsHit; }
+	
+	bool GetIsHit() {
+		return IsHit;
+	}
+
+	void SetIsInversed(bool InIsInversed) { IsInversed = InIsInversed; }
+
+	bool GetIsInversed() {
+		return IsInversed;
+	}
+	
+	UMeshComponent* GetMesh() {
+		return Mesh;
+	}
+
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
@@ -31,4 +48,7 @@ protected:
 
 	UPROPERTY(VisibleAnywhere, Category = Inversion)
 	UInversionComponent* InversionComponent;
+
+	bool IsHit;
+	bool IsInversed;
 };

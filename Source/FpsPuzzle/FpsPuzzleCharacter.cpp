@@ -6,6 +6,7 @@
 #include "Camera/CameraComponent.h"
 #include "GunActor.h"
 #include "DrawDebugHelpers.h"
+#include "AttackableActor.h"
 
 // Sets default values
 AFpsPuzzleCharacter::AFpsPuzzleCharacter()
@@ -167,6 +168,10 @@ void AFpsPuzzleCharacter::Shot()
 
 			UStaticMeshComponent* SM = Cast<UStaticMeshComponent>(HitActor->GetRootComponent());
 			SM->AddImpulse(ForwardVector * SM->GetMass() * 1200);
+
+			Cast<AAttackableActor>(HitActor)->SetIsHit(true);
+
+			Cast<AAttackableActor>(HitActor)->SetIsInversed(!Cast<AAttackableActor>(HitActor)->GetIsInversed());
 		}
 	}
 }
