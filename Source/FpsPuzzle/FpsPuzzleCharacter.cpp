@@ -167,7 +167,7 @@ void AFpsPuzzleCharacter::Shot()
 			// UE_LOG(LogTemp, Warning, TEXT("ForwardVector : %f %f %f"), ForwardVector.X, ForwardVector.Y, ForwardVector.Z);
 
 			UStaticMeshComponent* SM = Cast<UStaticMeshComponent>(HitActor->GetRootComponent());
-			SM->AddImpulse(ForwardVector * SM->GetMass() * 1200);
+			SM->AddImpulse(ForwardVector * SM->GetMass() * 1500);
 
 			Cast<AAttackableActor>(HitActor)->SetIsHit(true);
 
