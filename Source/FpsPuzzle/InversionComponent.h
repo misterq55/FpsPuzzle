@@ -25,6 +25,9 @@ public:
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
 private:
+	FTransform CurrentTrans;
 	FTransform PrevTrans;
 	TArray<FTransform> TransRecord;
+	int TickCount;
+
 };

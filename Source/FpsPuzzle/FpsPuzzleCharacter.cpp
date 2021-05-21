@@ -166,12 +166,14 @@ void AFpsPuzzleCharacter::Shot()
 			AActor* HitActor = HitResult.Actor.Get();
 			// UE_LOG(LogTemp, Warning, TEXT("ForwardVector : %f %f %f"), ForwardVector.X, ForwardVector.Y, ForwardVector.Z);
 
+			Cast<AAttackableActor>(HitActor)->GetMesh()->SetSimulatePhysics(true);
+
 			UStaticMeshComponent* SM = Cast<UStaticMeshComponent>(HitActor->GetRootComponent());
 			SM->AddImpulse(ForwardVector * SM->GetMass() * 1500);
 
 			Cast<AAttackableActor>(HitActor)->SetIsHit(true);
 
-			Cast<AAttackableActor>(HitActor)->SetIsInversed(!Cast<AAttackableActor>(HitActor)->GetIsInversed());
+			Cast<AAttackableActor>(HitActor)->SetIsInversed(true);
 		}
 	}
 }

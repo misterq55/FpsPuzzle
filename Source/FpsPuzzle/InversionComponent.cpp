@@ -40,7 +40,6 @@ void UInversionComponent::TickComponent(float DeltaTime, ELevelTick TickType, FA
 		
 		if (Owner->GetIsInversed())
 		{
-			FTransform CurrentTrans;
 			CurrentTrans = Owner->GetTransform();
 
 			if (CurrentTrans.Equals(PrevTrans))
@@ -58,7 +57,7 @@ void UInversionComponent::TickComponent(float DeltaTime, ELevelTick TickType, FA
 		}
 		else
 		{
-			Owner->GetMesh()->SetSimulatePhysics(true);
+			// Owner->GetMesh()->SetSimulatePhysics(true);
 
 			if (TransRecord.Num())
 			{
@@ -77,6 +76,21 @@ void UInversionComponent::TickComponent(float DeltaTime, ELevelTick TickType, FA
 
 				Owner->SetActorTransform(Trans);*/
 			}
+			/*else
+			{
+				CurrentTrans = Owner->GetTransform();
+
+				if (CurrentTrans.Equals(PrevTrans))
+				{
+					Owner->GetMesh()->SetSimulatePhysics(true);
+
+					PrevTrans = CurrentTrans;
+
+					return;
+				}
+
+				PrevTrans = CurrentTrans;
+			}*/
 		}
 	}
 }
