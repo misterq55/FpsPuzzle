@@ -61,6 +61,15 @@ void UInversionComponent::TickComponent(float DeltaTime, ELevelTick TickType, FA
 
 			if (TransRecord.Num())
 			{
+				if (TransRecord.Num() == 1)
+				{
+					FTransform Trans = TransRecord.Pop();
+
+					Owner->SetActorTransform(Trans);
+
+					return;
+				}
+
 				FTransform Lerped;
 
 				FTransform Trans = TransRecord.Pop();
