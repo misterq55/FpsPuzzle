@@ -76,6 +76,7 @@ void UInversionComponent::TickComponent(float DeltaTime, ELevelTick TickType, FA
 				
 				Lerped.SetLocation(FMath::Lerp(PrevTrans.GetLocation(), Trans.GetLocation(), 0.5));
 				Lerped.SetRotation(FMath::Lerp(PrevTrans.GetRotation(), Trans.GetRotation(), 0.5));
+				Lerped.SetScale3D(FMath::Lerp(PrevTrans.GetScale3D(), Trans.GetScale3D(), 0.5));
 
 				Owner->SetActorTransform(Lerped);
 
