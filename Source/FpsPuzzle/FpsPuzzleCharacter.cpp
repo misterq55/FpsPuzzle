@@ -6,7 +6,7 @@
 #include "Camera/CameraComponent.h"
 #include "GunActor.h"
 #include "DrawDebugHelpers.h"
-#include "AttackableActor.h"
+#include "InversionActor.h"
 
 // Sets default values
 AFpsPuzzleCharacter::AFpsPuzzleCharacter()
@@ -160,20 +160,8 @@ void AFpsPuzzleCharacter::Shot()
 	{
 		if (HitResult.Actor.IsValid())
 		{
-			// UE_LOG(LogTemp, Warning, TEXT("%s"), *FString(HitResult.Actor.Get()->GetName()));
-			// HitResult.Actor.Get()->GetRootComponent;
-
-			AActor* HitActor = HitResult.Actor.Get();
-			// UE_LOG(LogTemp, Warning, TEXT("ForwardVector : %f %f %f"), ForwardVector.X, ForwardVector.Y, ForwardVector.Z);
-
-			Cast<AAttackableActor>(HitActor)->GetMesh()->SetSimulatePhysics(true);
-
-			UStaticMeshComponent* SM = Cast<UStaticMeshComponent>(HitActor->GetRootComponent());
-			SM->AddImpulse(ForwardVector * SM->GetMass() * 1500);
-
-			Cast<AAttackableActor>(HitActor)->SetIsHit(true);
-
-			Cast<AAttackableActor>(HitActor)->SetIsInversed(true);
+			AInversionActor* HitInversionActor = Cast<AInversionActor>(HitResult.Actor.Get());
+			HitInversionActor->OnInversionActorHit(ForwardVector);
 		}
 	}
 }

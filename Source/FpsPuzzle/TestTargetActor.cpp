@@ -14,7 +14,7 @@ ATestTargetActor::ATestTargetActor()
 		Cast<UStaticMeshComponent>(Mesh)->SetStaticMesh(SM_TARGET.Object);
 	}
 
-	Mesh->SetCollisionProfileName(TEXT("ShotAttackable"));
+	Mesh->SetCollisionProfileName(TEXT("InversionShot"));
 	Mesh->SetSimulatePhysics(true);
 
 	RootComponent = Mesh;

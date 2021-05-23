@@ -4,26 +4,28 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
-#include "AttackableActor.generated.h"
+#include "InversionActor.generated.h"
 
 class UInversionComponent;
 
 UCLASS()
-class FPSPUZZLE_API AAttackableActor : public AActor
+class FPSPUZZLE_API AInversionActor : public AActor
 {
 	GENERATED_BODY()
 	
 public:	
 	// Sets default values for this actor's properties
-	AAttackableActor();
+	AInversionActor();
 
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
-
-public:
-	void SetIsHit(bool InIsHit) { IsHit = InIsHit; }
+	virtual void NotifyHit(class UPrimitiveComponent* MyComp, AActor* Other, class UPrimitiveComponent* OtherComp, bool bSelfMoved, FVector HitLocation, FVector HitNormal, FVector NormalImpulse, const FHitResult& Hit) override;
 	
+public:
+	void OnInversionActorHit(FVector ForwardVector);
+	void SetIsHit(bool InIsHit) { IsHit = InIsHit; }
+
 	bool GetIsHit() {
 		return IsHit;
 	}
@@ -33,7 +35,7 @@ public:
 	bool GetIsInversed() {
 		return IsInversed;
 	}
-	
+
 	UMeshComponent* GetMesh() {
 		return Mesh;
 	}
@@ -44,10 +46,10 @@ public:
 
 protected:
 	UPROPERTY(VisibleAnywhere, Category = Mesh)
-	UMeshComponent* Mesh;
+		UMeshComponent* Mesh;
 
 	UPROPERTY(VisibleAnywhere, Category = Inversion)
-	UInversionComponent* InversionComponent;
+		UInversionComponent* InversionComponent;
 
 	bool IsHit;
 	bool IsInversed;

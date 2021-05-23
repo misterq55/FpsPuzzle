@@ -3,14 +3,14 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "AttackableActor.h"
+#include "InversionActor.h"
 #include "TestOfficeActor.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class FPSPUZZLE_API ATestOfficeActor : public AAttackableActor
+class FPSPUZZLE_API ATestOfficeActor : public AInversionActor
 {
 	GENERATED_BODY()
 	

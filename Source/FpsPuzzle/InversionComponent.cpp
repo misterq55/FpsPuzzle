@@ -2,7 +2,7 @@
 
 
 #include "InversionComponent.h"
-#include "AttackableActor.h"
+#include "InversionActor.h"
 
 // Sets default values for this component's properties
 UInversionComponent::UInversionComponent()
@@ -33,7 +33,7 @@ void UInversionComponent::TickComponent(float DeltaTime, ELevelTick TickType, FA
 
 	// ...
 
-	AAttackableActor* Owner = Cast<AAttackableActor>(GetOwner());
+	AInversionActor* Owner = Cast<AInversionActor>(GetOwner());
 
 	if (Owner)
 	{
@@ -66,6 +66,7 @@ void UInversionComponent::TickComponent(float DeltaTime, ELevelTick TickType, FA
 					FTransform Trans = TransRecord.Pop();
 
 					Owner->SetActorTransform(Trans);
+					// Owner->GetMesh()->SetSimulatePhysics(true);
 
 					return;
 				}
