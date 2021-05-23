@@ -27,7 +27,7 @@ void AInversionActor::NotifyHit(UPrimitiveComponent* MyComp, AActor* Other, UPri
 	SetIsInversed(true);
 }
 
-void AInversionActor::OnInversionActorHit(FVector ForwardVector)
+void AInversionActor::OnInversionActorHit(FHitResult HitResult, FVector ForwardVector)
 {
 	GetMesh()->SetSimulatePhysics(true);
 	SetIsInversed(true);

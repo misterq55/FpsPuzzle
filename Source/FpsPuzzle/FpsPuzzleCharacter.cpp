@@ -161,7 +161,7 @@ void AFpsPuzzleCharacter::Shot()
 		if (HitResult.Actor.IsValid())
 		{
 			AInversionActor* HitInversionActor = Cast<AInversionActor>(HitResult.Actor.Get());
-			HitInversionActor->OnInversionActorHit(ForwardVector);
+			HitInversionActor->OnInversionActorHit(HitResult, ForwardVector);
 		}
 	}
 }

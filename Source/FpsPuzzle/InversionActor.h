@@ -23,7 +23,7 @@ protected:
 	virtual void NotifyHit(class UPrimitiveComponent* MyComp, AActor* Other, class UPrimitiveComponent* OtherComp, bool bSelfMoved, FVector HitLocation, FVector HitNormal, FVector NormalImpulse, const FHitResult& Hit) override;
 	
 public:
-	void OnInversionActorHit(FVector ForwardVector);
+	void OnInversionActorHit(FHitResult HitResult, FVector ForwardVector);
 	void SetIsHit(bool InIsHit) { IsHit = InIsHit; }
 
 	bool GetIsHit() {
